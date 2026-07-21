@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Painel de indicadores eMulti da Atenção Primária à Saúde do Rio de Janeiro.">
+  <title>Indicadores eMulti | Rio de Janeiro</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="cnes.css">
+</head>
+<body>
+  <header class="topbar">
+    <img class="official-logo" src="logo-saude-rio.png" alt="Saúde Pública Carioca, Prefeitura do Rio e SUS">
+    <div class="header-context"><span class="status-dot"></span><strong>Painel de monitoramento</strong><span>SIAPS · dado preliminar</span></div>
+  </header>
+
+  <main>
+    <section class="intro">
+      <div>
+        <p class="eyebrow">ATENÇÃO PRIMÁRIA À SAÚDE · GESTÃO DO CUIDADO</p>
+        <h1>Indicadores eMulti</h1>
+        <p class="subtitle">Produção assistencial e trabalho interprofissional nos territórios do Rio de Janeiro.</p>
+      </div>
+      <div class="period"><span>Competência</span><strong>DEZ / 2025</strong><small>Atualizado em 08 mar 2026</small></div>
+    </section>
+
+    <section class="controls" aria-label="Filtros do painel">
+      <label>Área Programática<select id="apFilter"><option value="all">Todas as APs</option></select></label>
+      <label>CNES<select id="cnesFilter"><option value="all">Todos os CNES</option></select></label>
+      <label>Localizar equipe<input id="searchInput" type="search" placeholder="Nome, CNES ou INE"></label>
+      <button id="clearFilters" type="button">Limpar filtros</button>
+    </section>
+
+    <section class="kpis" aria-label="Indicadores principais">
+      <article><span>Equipes no recorte</span><strong id="kpiTeams">—</strong><small>eMulti com registro</small></article>
+      <article><span>Pessoas atendidas</span><strong id="kpiPeople">—</strong><small>alcance registrado</small></article>
+      <article><span>Atendimentos</span><strong id="kpiVisits">—</strong><small>individuais e coletivos</small></article>
+      <article class="highlight"><span>Média por pessoa</span><strong id="kpiAverage">—</strong><small>atendimentos ÷ pessoas</small></article>
+      <article class="green"><span>Ações compartilhadas</span><strong id="kpiShared">—</strong><small id="kpiShareRate">—% do total de ações</small></article>
+    </section>
+
+    <nav class="tabs" aria-label="Visões do painel">
+      <button class="tab active" data-panel="territory">Visão territorial</button>
+      <button class="tab" data-panel="facilities">Classificação por CNES</button>
+      <button class="tab" data-panel="teams">Equipes</button>
+      <button class="tab" data-panel="method">Notas técnicas</button>
+    </nav>
+
+    <section id="territory" class="panel active">
+      <div class="section-heading"><div><p class="eyebrow">COMPARAÇÃO TERRITORIAL</p><h2>Desempenho por Área Programática</h2></div><p>Razões recalculadas a partir dos totais de cada território.</p></div>
+      <div class="map-layout">
+        <div class="map-card">
+          <div class="map-heading"><div><h3>Mapa das Áreas Programáticas</h3><p>Selecione um território para filtrar todo o painel.</p></div><button id="resetMap" type="button">Ver município</button></div>
+          <div id="apMap" class="ap-map" role="group" aria-label="Mapa interativo das Áreas Programáticas do Rio de Janeiro"></div>
+          <div class="map-key"><span><i></i> Área selecionada</span><small>Limites oficiais · Data.Rio / SMS / IPP</small></div>
+        </div>
+        <aside class="territory-profile" id="territoryProfile"></aside>
+      </div>
+      <div class="territory-grid">
+        <div class="chart-block"><h3>Média de atendimentos por pessoa</h3><div id="m1Chart" class="bar-chart"></div></div>
+        <div class="chart-block"><h3>Ações compartilhadas (%)</h3><div id="m2Chart" class="bar-chart green-bars"></div></div>
+      </div>
+      <div class="insight" id="territoryInsight"></div>
+    </section>
+
+    <section id="facilities" class="panel">
+      <div class="section-heading"><div><p class="eyebrow">ESTABELECIMENTOS DE SAÚDE</p><h2>Classificação por CNES</h2></div><p>Resultados agregados das equipes vinculadas a cada estabelecimento.</p></div>
+      <div class="ranking-toolbar">
+        <label>Classificar por
+          <select id="rankingMetric">
+            <option value="media">Média de atendimentos (M1)</option>
+            <option value="proporcao">Ações compartilhadas (M2)</option>
+            <option value="pessoas">Pessoas atendidas</option>
+            <option value="atendimentos">Total de atendimentos</option>
+          </select>
+        </label>
+        <div class="ranking-summary" id="rankingSummary"></div>
+      </div>
+      <div class="table-wrap"><table class="cnes-table"><thead><tr><th>Posição</th><th>CNES / Estabelecimento</th><th>AP</th><th>Equipes</th><th>Pessoas</th><th>Atendimentos</th><th>M1</th><th>Ações</th><th>Compart.</th><th>M2 (%)</th></tr></thead><tbody id="cnesRows"></tbody></table></div>
+      <p class="table-note" id="cnesCount"></p>
+    </section>
+
+    <section id="teams" class="panel">
+      <div class="section-heading"><div><p class="eyebrow">LEITURA POR EQUIPE</p><h2>Detalhamento dos registros</h2></div><button id="exportCsv" type="button">Exportar CSV</button></div>
+      <div class="legend"><span><i class="dot good"></i> acima da média</span><span><i class="dot mid"></i> próximo à média</span><span><i class="dot low"></i> abaixo da média</span></div>
+      <div class="table-wrap"><table><thead><tr><th data-sort="equipe">Equipe</th><th data-sort="ap">AP</th><th data-sort="pessoas">Pessoas</th><th data-sort="atendimentos">Atendimentos</th><th data-sort="media">Média M1</th><th data-sort="acoes">Ações</th><th data-sort="compartilhadas">Compart.</th><th data-sort="proporcao">M2 (%)</th></tr></thead><tbody id="teamRows"></tbody></table></div>
+      <p class="table-note" id="tableCount"></p>
+    </section>
+
+    <section id="method" class="panel">
+      <div class="section-heading"><div><p class="eyebrow">TRANSPARÊNCIA</p><h2>Notas técnicas</h2></div></div>
+      <div class="method-grid">
+        <article><span class="formula-id">M1</span><h3>Média de atendimentos</h3><p>Atendimentos individuais e coletivos realizados ÷ total de pessoas atendidas.</p><div class="formula">ATENDIMENTOS / PESSOAS</div></article>
+        <article><span class="formula-id green-id">M2</span><h3>Ações interprofissionais</h3><p>Ações compartilhadas realizadas ÷ total de ações realizadas × 100.</p><div class="formula">COMPARTILHADAS / AÇÕES × 100</div></article>
+      </div>
+      <aside class="warning"><strong>Leitura responsável</strong><p>Os dados são preliminares e descrevem produção registrada. Valores maiores não representam, isoladamente, melhor qualidade: devem ser analisados com perfil populacional, composição das equipes, organização local e qualidade do registro.</p></aside>
+      <p class="source">Fonte: Ministério da Saúde · SAPS · Sistema de Informação para a Atenção Primária à Saúde (SIAPS). Relatório Qualidade, visão por competência.</p>
+    </section>
+  </main>
+  <footer><img src="logo-saude-rio.png" alt="Saúde Pública Carioca"><div><strong>Secretaria Municipal de Saúde</strong><span>Monitoramento e apoio à decisão · Rio de Janeiro</span></div></footer>
+  <script src="mapa-aps.js"></script>
+  <script src="dados.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
