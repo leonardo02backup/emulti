@@ -1,0 +1,65 @@
+body { background: #f3f5f7; color: #152d43; }
+.topbar { height: 74px; background: #00284b; border: 0; box-shadow: none; padding: 0 max(24px, calc((100vw - 1360px)/2)); }
+.official-logo { width: 250px; max-width: 27vw; height: 54px; object-fit: contain; object-position: left center; }
+.institutional-nav { display: flex; align-items: center; justify-content: center; gap: clamp(22px, 3vw, 48px); flex: 1; color: #fff; font-size: 12px; font-weight: 700; }
+.institutional-nav span { white-space: nowrap; }
+.header-context { color: #b9d0e1; }
+.header-context strong { color: #fff; border-color: rgba(255,255,255,.2); }
+.status-dot { background: #53c697; }
+.intro { max-width: none; margin: 0; padding: 0; background: #093957; color: #fff; }
+.intro-inner { max-width: 1360px; min-height: 250px; margin: auto; padding: 46px 24px 42px; display: flex; align-items: flex-end; justify-content: space-between; gap: 30px; }
+.intro .eyebrow { color: #70c7ef; font-size: 12px; }
+.intro h1 { color: #fff; font-size: 44px; text-transform: uppercase; margin-bottom: 14px; }
+.intro .subtitle { color: #c5d5e1; max-width: 720px; font-size: 15px; line-height: 1.55; }
+.intro .period { border-left-color: #55a7df; }
+.intro .period span, .intro .period small { color: #b8cbd9; }
+main { max-width: 1360px; padding: 0 24px 60px; display: flex; flex-direction: column; }
+.controls { order: 1; margin: 0 -24px; padding: 14px 24px; border: 0; border-bottom: 1px solid #d8dee4; box-shadow: 0 2px 4px rgba(0,32,58,.08); }
+.controls label { color: #697b8d; font-weight: 600; text-transform: none; }
+.controls select, .controls input { border-color: #d3dbe3; border-radius: 6px; height: 38px; }
+.controls button { height: 38px; background: #002e56; color: #fff; border: 0; border-radius: 6px; }
+.tabs { order: 2; margin: 0 -24px 26px; padding: 0 24px; height: 50px; align-items: stretch; background: #fff; border: 0; border-bottom: 1px solid #dfe4e8; gap: 8px; }
+.tab { padding: 0 18px; border-bottom-width: 2px; color: #52687a; font-weight: 600; }
+.tab.active { color: #003963; border-bottom-color: #003963; }
+.kpis { order: 3; margin-bottom: 24px; gap: 16px; }
+.kpis::before { content: "INDICADORES DO MUNICÍPIO · PRODUÇÃO EMULTI"; grid-column: 1 / -1; color: #456176; font-size: 11px; font-weight: 800; padding-left: 16px; }
+.kpis article { min-height: 150px; padding: 20px 22px; border: 1px solid #e0e6eb; border-top: 3px solid #4f9cdb; border-radius: 8px; box-shadow: 0 6px 16px rgba(28,55,75,.08); }
+.kpis article:nth-of-type(4) { border-top-color: #2aa28f; }
+.kpis article:nth-of-type(5) { border-top-color: #75bade; }
+.kpis span { color: #4b6578; text-transform: uppercase; font-size: 10px; font-weight: 700; }
+.kpis strong { font-size: 29px; color: #071d30; }
+.kpis small { color: #148267; font-size: 11px; }
+.panel { order: 4; padding-top: 2px; }
+.section-heading { margin: 10px 0 18px; }
+.section-heading .eyebrow { color: #4388bd; }
+.section-heading h2 { color: #17374f; }
+.map-card, .chart-block, .method-grid article, .ranking-toolbar, .table-wrap { border-color: #dfe6eb; border-radius: 8px; box-shadow: 0 4px 14px rgba(31,58,77,.06); }
+.territory-profile { border-radius: 8px; background: #073c5d; }
+.profile-stats div { background: #073c5d; }
+.insight { border-radius: 6px; background: #e9f3f7; border-left-color: #3c94c8; }
+footer { background: #00284b; border: 0; color: #fff; padding: 28px; }
+footer div { border: 0; padding: 0; text-align: center; }
+footer span { color: #b7cbd9; }
+@media (max-width: 1040px) { .institutional-nav span:nth-child(2) { display: none; } }
+@media (max-width: 760px) {
+  .institutional-nav { display: none; }
+  .official-logo { max-width: 62vw; }
+  .intro-inner { min-height: 230px; padding-top: 36px; align-items: flex-start; flex-direction: column; }
+  .intro h1 { font-size: 35px; }
+  .intro .period { margin-top: 0; }
+  main { padding-left: 14px; padding-right: 14px; }
+  .controls, .tabs { margin-left: -14px; margin-right: -14px; padding-left: 14px; padding-right: 14px; }
+}
+@media (max-width: 620px) {
+  .topbar { height: 66px; }
+  .official-logo { height: 48px; max-width: 78vw; }
+  .intro-inner { min-height: 236px; padding: 32px 14px 30px; }
+  .intro h1 { font-size: 32px; }
+  .intro .subtitle { font-size: 14px; }
+  .kpis { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); overflow: visible; gap: 10px; }
+  .kpis::before { grid-column: 1 / -1; padding-left: 4px; }
+  .kpis article { min-height: 126px; width: auto; min-width: 0; padding: 16px 14px; }
+  .kpis article:last-child { grid-column: 1 / -1; }
+  .tabs { scrollbar-width: none; }
+  .tabs::-webkit-scrollbar { display: none; }
+}

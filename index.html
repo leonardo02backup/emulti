@@ -7,22 +7,29 @@
   <title>Indicadores eMulti | Rio de Janeiro</title>
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="cnes.css">
+  <link rel="stylesheet" href="layout-2025.css">
 </head>
 <body>
   <header class="topbar">
-    <img class="official-logo" src="logo-saude-rio.png" alt="Saúde Pública Carioca, Prefeitura do Rio e SUS">
-    <div class="header-context"><span class="status-dot"></span><strong>Painel de monitoramento</strong><span>SIAPS · dado preliminar</span></div>
+    <img class="official-logo" src="logo-prefeitura-saude-sus-2025.png" alt="Prefeitura do Rio, Secretaria Municipal de Saúde e SUS">
+    <nav class="institutional-nav" aria-label="Navegação institucional">
+      <span>Inteligência Assistencial</span><span>BI-APS Rio</span><span>Monitores e Painéis</span>
+    </nav>
+    <div class="header-context"><span class="status-dot"></span><strong>SIAPS</strong><span>Dado preliminar</span></div>
   </header>
 
-  <main>
-    <section class="intro">
+  <section class="intro">
+    <div class="intro-inner">
       <div>
-        <p class="eyebrow">ATENÇÃO PRIMÁRIA À SAÚDE · GESTÃO DO CUIDADO</p>
+        <p class="eyebrow">MONITOR EMULTI</p>
         <h1>Indicadores eMulti</h1>
-        <p class="subtitle">Produção assistencial e trabalho interprofissional nos territórios do Rio de Janeiro.</p>
+        <p class="subtitle">Painel integrado da produção assistencial e do trabalho interprofissional nos territórios do Rio de Janeiro.</p>
       </div>
       <div class="period"><span>Competência</span><strong>DEZ / 2025</strong><small>Atualizado em 08 mar 2026</small></div>
+    </div>
     </section>
+
+  <main>
 
     <section class="controls" aria-label="Filtros do painel">
       <label>Área Programática<select id="apFilter"><option value="all">Todas as APs</option></select></label>
@@ -97,7 +104,7 @@
       <p class="source">Fonte: Ministério da Saúde · SAPS · Sistema de Informação para a Atenção Primária à Saúde (SIAPS). Relatório Qualidade, visão por competência.</p>
     </section>
   </main>
-  <footer><img src="logo-saude-rio.png" alt="Saúde Pública Carioca"><div><strong>Secretaria Municipal de Saúde</strong><span>Monitoramento e apoio à decisão · Rio de Janeiro</span></div></footer>
+  <footer><div><strong>Secretaria Municipal de Saúde do Rio de Janeiro</strong><span>Inteligência assistencial · Monitoramento e apoio à decisão</span></div></footer>
   <script src="mapa-aps.js"></script>
   <script src="dados.js"></script>
   <script src="app.js"></script>
